@@ -1,0 +1,506 @@
+{
+  "19,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "225.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "6.750,00",
+    "perda_aluguel": "9.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "9.000,00"
+  },
+  "25,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "300.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "9.000,00",
+    "perda_aluguel": "12.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "12.000,00"
+  },
+  "30,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "375.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "11.250,00",
+    "perda_aluguel": "15.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "15.000,00"
+  },
+  "35,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "450.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "13.500,00",
+    "perda_aluguel": "18.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "18.000,00"
+  },
+  "46,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "600.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "18.000,00",
+    "perda_aluguel": "24.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "24.000,00"
+  },
+  "57,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "750.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "22.500,00",
+    "perda_aluguel": "30.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "30.000,00"
+  },
+  "67,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "900.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "27.000,00",
+    "perda_aluguel": "36.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "36.000,00"
+  },
+  "78,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "1.050.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "31.500,00",
+    "perda_aluguel": "42.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "42.000,00"
+  },
+  "89,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "1.200.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "36.500,00",
+    "perda_aluguel": "48.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "48.000,00"
+  },
+  "100,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "1.350.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "40.500,00",
+    "perda_aluguel": "54.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "54.000,00"
+  },
+  "110,96": {
+    "categoria": "RESIDENCIAL: APARTAMENTO",
+    "incendio": "1.500.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "45.000,00",
+    "perda_aluguel": "60.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "60.000,00"
+  },
+  "22,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "125.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "3.750,00",
+    "perda_aluguel": "4.800,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "3.750,00"
+  },
+  "26,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "200.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "6.000,00",
+    "perda_aluguel": "6.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "6.000,00"
+  },
+  "36,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "250.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "7.500,00",
+    "perda_aluguel": "9.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "7.500,00"
+  },
+  "39,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "325.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "9.750,00",
+    "perda_aluguel": "12.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "9.750,00"
+  },
+  "47,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "375.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "11.250,00",
+    "perda_aluguel": "15.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "11.250,00"
+  },
+  "56,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "450.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "13.500,00",
+    "perda_aluguel": "18.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "13.500,00"
+  },
+  "73,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "500.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "15.000,00",
+    "perda_aluguel": "24.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "15.000,00"
+  },
+  "84,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "625.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "18.750,00",
+    "perda_aluguel": "30.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "18.750,00"
+  },
+  "100,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "750.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "22.500,00",
+    "perda_aluguel": "36.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "22.500,00"
+  },
+  "116,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "875.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "26.250,00",
+    "perda_aluguel": "42.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "26.250,00"
+  },
+  "132,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "1.000.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "30.000,00",
+    "perda_aluguel": "48.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "30.000,00"
+  },
+  "148,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "1.125.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "33.750,00",
+    "perda_aluguel": "54.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "33.750,00"
+  },
+  "164,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "1.250.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "37.500,00",
+    "perda_aluguel": "60.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "37.500,00"
+  },
+  "170,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "1.500.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "45.000,00",
+    "perda_aluguel": "90.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "45.000,00"
+  },
+  "185,97": {
+    "categoria": "RESIDENCIAL: CASA",
+    "incendio": "1.750.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "52.500,00",
+    "perda_aluguel": "120.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "52.500,00"
+  },
+  "22,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "125.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "3.750,00",
+    "perda_aluguel": "4.800,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "3.750,00"
+  },
+  "26,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "200.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "6.000,00",
+    "perda_aluguel": "6.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "6.000,00"
+  },
+  "36,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "250.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "7.500,00",
+    "perda_aluguel": "9.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "7.500,00"
+  },
+  "39,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "325.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "9.750,00",
+    "perda_aluguel": "12.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "9.750,00"
+  },
+  "47,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "375.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "11.250,00",
+    "perda_aluguel": "15.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "11.250,00"
+  },
+  "56,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "450.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "13.500,00",
+    "perda_aluguel": "18.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "13.500,00"
+  },
+  "73,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "500.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "15.000,00",
+    "perda_aluguel": "24.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "15.000,00"
+  },
+  "84,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "625.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "18.750,00",
+    "perda_aluguel": "30.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "18.750,00"
+  },
+  "100,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "750.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "22.500,00",
+    "perda_aluguel": "36.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "22.500,00"
+  },
+  "116,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "875.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "26.250,00",
+    "perda_aluguel": "42.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "26.250,00"
+  },
+  "132,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "1.000.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "30.000,00",
+    "perda_aluguel": "48.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "30.000,00"
+  },
+  "148,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "1.125.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "33.750,00",
+    "perda_aluguel": "54.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "33.750,00"
+  },
+  "164,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "1.250.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "37.500,00",
+    "perda_aluguel": "60.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "37.500,00"
+  },
+  "170,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "1.500.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "45.000,00",
+    "perda_aluguel": "90.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "45.000,00"
+  },
+  "185,98": {
+    "categoria": "COMERCIAL: ESCRITÓRIO E CONSULTÓRIO",
+    "incendio": "1.750.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "52.500,00",
+    "perda_aluguel": "120.000,00",
+    "danos_eletricos": "3.000,00",
+    "responsabilidade_civil": "52.500,00"
+  },
+  "32,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "125.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "3.750,00",
+    "perda_aluguel": "4.800,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "49,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "200.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "6.000,00",
+    "perda_aluguel": "6.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "61,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "250.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "7.500,00",
+    "perda_aluguel": "9.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "79,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "325.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "9.750,00",
+    "perda_aluguel": "12.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "91,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "375.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "11.250,00",
+    "perda_aluguel": "15.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "108,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "450.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "13.500,00",
+    "perda_aluguel": "18.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "121,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "500.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "15.000,00",
+    "perda_aluguel": "24.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "151,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "625.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "18.750,00",
+    "perda_aluguel": "30.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "180,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "750.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "22.500,00",
+    "perda_aluguel": "36.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "210,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "875.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "26.250,00",
+    "perda_aluguel": "42.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "240,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "1.000.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "30.000,00",
+    "perda_aluguel": "48.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "269,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "1.125.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "33.750,00",
+    "perda_aluguel": "54.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "299,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "1.250.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "37.500,00",
+    "perda_aluguel": "60.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "363,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "1.500.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "45.000,00",
+    "perda_aluguel": "90.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  },
+  "427,99": {
+    "categoria": "COMERCIAL: COMÉRCIO E SERVIÇO",
+    "incendio": "1.750.000,00",
+    "incendio_conteudo": "20.000,00",
+    "vendaval": "52.500,00",
+    "perda_aluguel": "120.000,00",
+    "danos_eletricos": null,
+    "responsabilidade_civil": null
+  }
+}

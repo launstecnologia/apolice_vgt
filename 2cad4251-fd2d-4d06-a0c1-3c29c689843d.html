@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apólice de Seguro - MAPFRE Imobiliário Residencial</title>
+    <style>
+        @page { size: A4; margin: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Arial", "Helvetica", sans-serif;
+            font-size: 11.4pt;
+            line-height: 1.27;
+            color: #000;
+            background: #fff;
+            -webkit-print-color-adjust: exact;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+        .page:last-child { page-break-after: auto; }
+        .header-bar { background: #D31011; height: 13mm; width: 100%; }
+        .content-area { padding: 7mm 10mm 18mm 10mm; }
+        .section-title {
+            color: #D31011;
+            font-weight: bold;
+            font-size: 13.2pt;
+            margin-top: 3.8mm;
+            margin-bottom: 2.2mm;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            position: relative;
+            left: -4mm;
+        }
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 3.2pt;
+            height: 12.5pt;
+            background: #888;
+            margin-right: 3.6mm;
+            flex-shrink: 0;
+        }
+        .section-content { margin-bottom: 2.6mm; }
+        table.info {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.2pt;
+        }
+        table.info td {
+            padding: 0.85mm 0;
+            vertical-align: top;
+        }
+        .label { font-weight: bold; }
+        .col-1 { width: 34%; }
+        .col-2 { width: 33%; }
+        .col-3 { width: 33%; }
+        .col-60 { width: 60%; }
+        .col-40 { width: 40%; }
+        .no-break { page-break-inside: avoid; break-inside: avoid; }
+        .page-footer-info {
+            position: absolute;
+            bottom: 4mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10pt;
+            color: #444;
+        }
+        .mapfre-footer-logo {
+            position: absolute;
+            bottom: 8mm;
+            right: 10mm;
+            z-index: 2;
+        }
+        .mapfre-footer-logo img {
+            display: block;
+            width: 110px;
+            height: auto;
+        }
+        table.values {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.2pt;
+            margin-top: 2.4mm;
+            table-layout: fixed;
+        }
+        table.values thead th { vertical-align: bottom; }
+        table.values td.text-right,
+        table.values th.text-right { padding-right: 2mm; }
+        .tabular { font-variant-numeric: tabular-nums; }
+        table.values th {
+            text-align: left;
+            border-bottom: 1pt solid #000;
+            padding: 1.3mm 0;
+            font-weight: bold;
+        }
+        table.values td { padding: 1.1mm 0; }
+        .text-right { text-align: right; }
+        .col-valor { width: 28%; }
+        .col-cobertura { width: 72%; }
+        .value-cell { text-align: right; padding-right: 2mm; }
+        .value-head { text-align: right; padding-right: 2mm; }
+        .section-text { font-size: 10.6pt; line-height: 1.32; }
+        table.simple {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10.6pt;
+        }
+        table.simple th {
+            text-align: left;
+            font-weight: bold;
+            padding: 0.9mm 0;
+        }
+        table.simple td { padding: 0.7mm 0; vertical-align: top; }
+        .mt-2 { margin-top: 2mm; }
+        .mt-3 { margin-top: 3mm; }
+        table.signature {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9.5pt;
+        }
+        table.signature td { padding: 1mm 0; }
+        .signature-note { font-size: 9pt; }
+    </style>
+</head>
+<body>
+<!-- PÁGINA 1 -->
+<div class="page">
+    <div class="header-bar"></div>
+    <div class="content-area">
+        <div class="section-title">APÓLICE DE SEGURO<br><span style="margin-left: 10px;">MAPFRE IMOBILIÁRIO RESIDENCIAL</span></div>
+
+        <div class="section-title">DADOS GERAIS</div>
+        <div class="section-content">
+            <table class="info">
+                <tr>
+                    <td colspan="3"><span class="label">Processo SUSEP Nº:</span> 15414.004427/2004-24</td>
+                </tr>
+                <tr>
+                    <td class="col-1"><span class="label">Ramo:</span> 014</td>
+                    <td class="col-2"><span class="label">Produto:</span> 445</td>
+                    <td class="col-3"><span class="label">Nº Apólice:</span> 2082000693014</td>
+                </tr>
+                <tr>
+                    <td class="col-1"><span class="label">Endosso:</span> 00000</td>
+                    <td class="col-2"><span class="label">Itens:</span></td>
+                    <td class="col-3"><span class="label">Nº Via:</span> 1</td>
+                </tr>
+                <tr>
+                    <td class="col-1" colspan="2"><span class="label">Vigência início 24h do dia:</span> {{VIGENCIA_INICIO}}</td>
+                    <td class="col-3"><span class="label">Término 24h do dia:</span> {{VIGENCIA_FIM}}</td>
+                </tr>
+                <tr>
+                    <td class="col-1" colspan="2"><span class="label">Data e hora da proposta:</span> {{DATA_PROPOSTA}}</td>
+                    <td class="col-3"><span class="label">Nº Proposta:</span> 50267385000000000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-title">DADOS DA SEGURADORA</div>
+        <div class="section-content">
+            <table class="info">
+                <tr>
+                    <td colspan="2"><span class="label">Nome:</span> MAPFRE SEGUROS GERAIS S/A</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">CNPJ:</span> 61.074.175/0001-38</td>
+                    <td class="col-40"><span class="label">Código na SUSEP:</span> 6238</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Endereço:</span> AV DAS NACOES UNIDAS, 14.261 - ALA A</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Bairro:</span> VILA GERTRUDES</td>
+                    <td class="col-40"><span class="label">CEP:</span> 04794000</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Cidade:</span> SAO PAULO</td>
+                    <td class="col-40"><span class="label">UF:</span> SP</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-title">DADOS DA SUCURSAL</div>
+        <div class="section-content">
+            <table class="info">
+                <tr>
+                    <td colspan="2"><span class="label">Nome:</span> NEGOCIOS IMOBILIARIOS RIBEIRÃO</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">CNPJ:</span> 61.074.175/0032-34</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Endereço:</span> AV TREZE DE MAIO, 1109,</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Bairro:</span> RIBEIRÃO PRETO</td>
+                    <td class="col-40"><span class="label">CEP:</span> 14090270</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Cidade:</span> RIBEIRÃO PRETO</td>
+                    <td class="col-40"><span class="label">UF:</span> SP</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Telefone:</span> 39117800</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-title">DADOS DO CORRETOR</div>
+        <div class="section-content">
+            <table class="info">
+                <tr>
+                    <td colspan="2"><span class="label">Código interno e nome:</span> 039355 - VGT CORRETORA DE SEGUROS LTDA</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">CPF/CNPJ:</span> 208210250094000100</td>
+                    <td class="col-40"><span class="label">Código SUSEP:</span> 00000202005574</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Telefone:</span> 1632342572</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Endereço:</span> AVENIDA MAURILIO BIAGI, 800</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Bairro:</span> SANTA CRUZ DO JOSE JACQUES</td>
+                    <td class="col-40"><span class="label">CEP:</span> 14020750</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Cidade:</span> RIBEIRÃO PRETO</td>
+                    <td class="col-40"><span class="label">UF:</span> SP</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-footer-info"><span class="label">1</span><br>Classificação: Uso Interno</div>
+    <div class="mapfre-footer-logo">
+        <img src="{{LOGO_MAPFRE}}" alt="MAPFRE" onerror="this.onerror=null;this.src='public/logo_mafre.jpg';">
+    </div>
+</div>
+
+<!-- PÁGINA 2 -->
+<div class="page">
+    <div class="header-bar"></div>
+    <div class="content-area">
+        <div class="section-title">DADOS DO ESTIPULANTE/RESPONSÁVEL PELO PAGAMENTO DO PRÊMIO (PREÇO) DO SEGURO</div>
+        <div class="section-content no-break">
+            <table class="info">
+                <tr>
+                    <td class="col-60"><span class="label">Nome:</span> RESIDENCIA IMOVEIS MOCOCA LTDA</td>
+                    <td class="col-40"><span class="label">CPF/CNPJ:</span> 15299200000164</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Endereço:</span> PC DR JEFERSON FERRAZ, 47</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Bairro:</span> CENTRO</td>
+                    <td class="col-40"><span class="label">CEP:</span> 13730-119</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Cidade:</span> MOCOCA</td>
+                    <td class="col-40"><span class="label">UF:</span> SP</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Telefone:</span> 00</td>
+                    <td class="col-40"><span class="label">Pró Labore:</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Valor do Pró-Labore:</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-title">DADOS DO SEGURADO</div>
+        <div class="section-content no-break">
+            <table class="info">
+                <tr>
+                    <td colspan="2"><span class="label">Nome:</span> {{NOME_SEGURADO}}</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Tipo de pessoa:</span> {{TIPO_PESSOA}}</td>
+                    <td class="col-40"><span class="label">CPF/CNPJ:</span> {{CPF_CNPJ}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Endereço:</span> {{ENDERECO_SEGURADO}}</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Bairro:</span> {{BAIRRO_SEGURADO}}</td>
+                    <td class="col-40"><span class="label">CEP:</span> {{CEP_SEGURADO}}</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Cidade:</span> {{CIDADE_SEGURADO}}</td>
+                    <td class="col-40"><span class="label">UF:</span> {{UF_SEGURADO}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-title">QUESTIONÁRIO DE AVALIAÇÃO DE RISCO</div>
+        <div class="section-content no-break">
+            <table class="info">
+                <tr>
+                    <td colspan="2"><span class="label">Descrição do Risco:</span> RESIDENCIAL - CASA</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Endereço do Risco:</span> {{ENDERECO_RISCO}} Nº: {{NUMERO_RISCO}}</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Bairro:</span> {{BAIRRO_RISCO}}</td>
+                    <td class="col-40"><span class="label">CEP:</span> {{CEP_RISCO}}</td>
+                </tr>
+                <tr>
+                    <td class="col-60"><span class="label">Cidade:</span> {{CIDADE_RISCO}}</td>
+                    <td class="col-40"><span class="label">Estado:</span> {{UF_RISCO}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Possui mais de 25% de madeira na construção, é patrimônio tombado ou localiza-se em mercado público/CEASA? <span class="label">{{QUESTIONARIO_RESPOSTAS}}</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-title">COBERTURAS CONTRATADAS E VALORES MÁXIMOS DE INDENIZAÇÃO</div>
+        <table class="values no-break">
+            <colgroup>
+                <col class="col-cobertura">
+                <col class="col-valor">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="col-cobertura">Cobertura</th>
+                    <th class="value-head">Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>INCÊNDIO</td><td class="">{{VALOR_INCENDIO}}</td></tr>
+                <tr><td>INCÊNDIO DO CONTEÚDO</td><td class="">{{VALOR_INCENDIO_CONTEUDO}}</td></tr>
+                <tr><td>VENDAVAL</td><td class="">{{VALOR_VENDAVAL}}</td></tr>
+                <tr><td>PERDA DE ALUGUEL</td><td class="">{{VALOR_PERDA_ALUGUEL}}</td></tr>
+                <tr><td>DANO ELÉTRICO (PRÉDIO)</td><td class="">{{VALOR_DANOS_ELETRICOS}}</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="page-footer-info"><span class="label">2</span><br>Classificação: Uso Interno</div>
+    <div class="mapfre-footer-logo">
+        <img src="{{LOGO_MAPFRE}}" alt="MAPFRE" onerror="this.onerror=null;this.src='public/logo_mafre.jpg';">
+    </div>
+</div>
+
+<!-- PÁGINA 3 -->
+<div class="page">
+    <div class="header-bar"></div>
+    <div class="content-area">
+        <div class="section-title">RAMO E CÓDIGO DAS COBERTURAS CONTRATADAS</div>
+        <table class="simple">
+            <thead>
+                <tr>
+                    <th style="width: 60%;">Cobertura</th>
+                    <th style="width: 20%;">Ramo</th>
+                    <th style="width: 20%;">Código</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>INCÊNDIO</td><td>14</td><td>443</td></tr>
+                <tr><td>INCÊNDIO DO CONTEÚDO</td><td>14</td><td>444</td></tr>
+                <tr><td>VENDAVAL</td><td>14</td><td>188</td></tr>
+                <tr><td>PERDA DE ALUGUEL</td><td>14</td><td>613</td></tr>
+                <tr><td>DANOS ELÉTRICOS</td><td>14</td><td>438</td></tr>
+            </tbody>
+        </table>
+
+        <div class="section-title mt-3">ASSISTÊNCIA</div>
+        <div class="section-text">
+            Custo da Assistência: R$ <span class="label"> </span> &nbsp;&nbsp; Perfil: <span class="label">TOP PLUS</span>
+        </div>
+        <div class="section-text mt-2">
+            Serviços disponíveis no Perfil de Assistência TOP PLUS: Chaveiro, Encanador,
+            Desentupimento, Eletricista, Limpeza de Caixa de Gordura, Vidraceiro, Vigia,
+            Substituição de Telhas, Cobertura Provisória de Telhados, Reparos de
+            Telefonia e Manutenção e Prevenção Domiciliar.
+        </div>
+        <div class="section-text mt-2">
+            Os detalhes referentes a cada serviço estão disponíveis no site da MAPFRE:
+            www.mapfre.com.br em: Condições Gerais/MAPFRE IMOBILIÁRIO RESIDENCIAL.
+        </div>
+
+        <div class="section-title mt-3">FRANQUIAS</div>
+        <table class="simple">
+            <thead>
+                <tr>
+                    <th style="width: 55%;">Nome</th>
+                    <th style="width: 20%;">Valor (R$)</th>
+                    <th style="width: 25%;">Participação Obrigatória do Segurado (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>FRANQUIA VENDAVAL</td><td>200,00</td><td>10</td></tr>
+                <tr><td>DANO ELÉTRICO</td><td>200,00</td><td>10</td></tr>
+            </tbody>
+        </table>
+        <div class="section-text mt-2">
+            FRANQUIA: A participação obrigatória do segurado (P.O.S) será calculada
+            aplicando-se o percentual sobre os prejuízos apurados em cada sinistro,
+            observado o limite mínimo indicado acima como franquia.
+        </div>
+
+        <div class="section-title mt-3">DEMONSTRATIVO DE PRÊMIO DA APÓLICE - VALORES EM R$</div>
+        <table class="simple">
+            <tbody>
+                <tr><td style="width: 35%;">Prêmio líquido:</td><td style="width: 15%;">16,64</td><td style="width: 35%;">Encargos:</td><td style="width: 15%;">0,00</td></tr>
+                <tr><td>IOF:</td><td>1,32</td><td>Prêmio:</td><td>17,97</td></tr>
+            </tbody>
+        </table>
+        <div class="section-text mt-2">
+            Em atendimento à Lei 12.741/12, informamos que incidem as alíquotas de
+            0,65% de PIS/PASEP e de 4% de COFINS sobre os prêmios de seguros, sobre
+            as contribuições a planos de caráter previdenciário e sobre os pagamentos
+        </div>
+    </div>
+    <div class="page-footer-info"><span class="label">3</span><br>Classificação: Uso Interno</div>
+    <div class="mapfre-footer-logo">
+        <img src="{{LOGO_MAPFRE}}" alt="MAPFRE" onerror="this.onerror=null;this.src='public/logo_mafre.jpg';">
+    </div>
+</div>
+
+<!-- PÁGINA 4 -->
+<div class="page">
+    <div class="header-bar"></div>
+    <div class="content-area">
+        <div class="section-text mt-2">
+            destinados a planos de capitalização, deduzidas do estabelecido em legislação específica.
+        </div>
+        <div class="section-text mt-2">
+            A alíquota do IOF foi estabelecida na forma do Decreto nº 6.339, de 3.1.2008.
+        </div>
+
+        <div class="section-title mt-3">PAGAMENTO DO PRÊMIO - VALORES EM R$</div>
+        <table class="simple">
+            <tbody>
+                <tr>
+                    <td style="width: 55%;"><span class="label">Forma:</span> FICHA DE COMPENSAÇÃO</td>
+                    <td style="width: 45%;"><span class="label">Nº de parcela:</span> 01</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="label">Taxa de juros:</span> 0%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-title mt-3">OBSERVAÇÕES COMPLEMENTARES</div>
+        <div class="section-text">
+            Seguro em reais não sujeito a qualquer atualização monetária, conforme Regulamentação Vigente.
+        </div>
+        <div class="section-text mt-2">
+            Informações sobre o pagamento de parcelas
+        </div>
+        <div class="section-text mt-2">
+            I - O não pagamento de quaisquer parcelas implicará na cláusula de pagamento de prêmio,
+            contida nas condições gerais;
+        </div>
+        <div class="section-text mt-2">
+            II - O não pagamento das demais parcelas implicará o cancelamento da apólice nos termos da cláusula
+            "Pagamento do Prêmio" contida nas Condições Gerais do Contrato de Seguro.
+        </div>
+        <div class="section-text mt-2">
+            Poderá (ão) ser enviado (s) boleto(s) de pagamento para se quitar o prêmio do seguro (preço)
+            à vista ou em parcelas.
+        </div>
+
+        <div class="section-title mt-3">INFORMAÇÕES SOBRE A SUSEP</div>
+        <div class="section-text">
+            Processos SUSEP Nº: 15414.901232/2013-15
+        </div>
+        <div class="section-text mt-2">
+            O registro de produto é automático e não representa aprovação ou recomendação por parte da SUSEP.
+        </div>
+        <div class="section-text mt-2">
+            As condições contratuais/regulamento deste produto protocolizadas pela sociedade/entidade junto à SUSEP
+            poderão ser consultadas no endereço
+        </div>
+    </div>
+    <div class="page-footer-info"><span class="label">4</span><br>Classificação: Uso Interno</div>
+    <div class="mapfre-footer-logo">
+        <img src="{{LOGO_MAPFRE}}" alt="MAPFRE" onerror="this.onerror=null;this.src='public/logo_mafre.jpg';">
+    </div>
+</div>
+
+<!-- PÁGINA 5 -->
+<div class="page">
+    <div class="header-bar"></div>
+    <div class="content-area">
+        <div class="section-text mt-2">
+            eletrônico www.susep.gov.br/menu/consulta-de-produtos-1 de acordo com o(s) número(s) do(s) processo(s)
+            constante(s) da proposta/apólice.
+        </div>
+
+        <div class="section-title mt-3">INFORMAÇÕES BÁSICAS SOBRE PROTEÇÃO DE DADOS (LGPD)</div>
+        <div class="section-text">
+            O Grupo MAPFRE respeita e cumpre as exigências previstas na Lei nº 13.709/2018, que trata da proteção
+            de dados pessoais, zelando pelos seus dados pessoais em conformidade com as hipóteses legais. Caso deseje
+            obter mais informações de seus direitos como o titular dos dados pessoais, e como Grupo MAPFRE trata seus
+            dados, consulte https://politica.mapfre.com.br/#/politica-privacidade
+        </div>
+
+        <div class="section-title mt-3">INFORMAÇÕES FORNECIDAS PARA CONTRATAÇÃO DO SEGURO</div>
+        <div class="section-text">
+            As informações fornecidas no Questionário de Avaliação de Risco em conjunto com as informações da proposta
+            são essenciais para a fixação do prêmio do seguro. Se em eventual sinistro for verificada alguma divergência
+            entre o risco aceito e o constatado, o segurado perderá o direito à garantia, além de ficar obrigado ao prêmio
+            vencido, conforme legislação vigente.
+        </div>
+        <div class="section-text mt-2">
+            Os direitos e deveres das partes deste contrato de seguro estão previstos nas Condições Gerais do Seguro
+            disponíveis no site www.mapfre.com.br.
+        </div>
+    </div>
+    <div class="page-footer-info"><span class="label">5</span><br>Classificação: Uso Interno</div>
+    <div class="mapfre-footer-logo">
+        <img src="{{LOGO_MAPFRE}}" alt="MAPFRE" onerror="this.onerror=null;this.src='public/logo_mafre.jpg';">
+    </div>
+</div>
+
+<!-- PÁGINA 6 -->
+<div class="page">
+    <div class="header-bar"></div>
+    <div class="content-area">
+        <div class="section-text mt-2">
+            Para validade do presente contrato, os representantes legais da MAPFRE SEGUROS GERAIS S/A, nesta data,
+            emitem e assinam esta apólice ou endosso na cidade de São Paulo.
+        </div>
+
+        <div class="section-text mt-3 signature-note">
+            Documento eletrônico assinado digitalmente, nos termos da Medida Provisória 2.200-2/2001
+        </div>
+
+        <table class="signature mt-3">
+            <tr>
+                <td style="width: 50%;">
+                    ROBERTO JUNQUE DE ANTONI<br>
+                    41178814<br>
+                    1110222022 14:37:47
+                </td>
+                <td style="width: 50%;">
+                    ORLANDO LUCESI IBARRA CAMPO<br>
+                    1120583171<br>
+                    1110222022 14:37:47
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-footer-info"><span class="label">6</span><br>Classificação: Uso Interno</div>
+    <div class="mapfre-footer-logo">
+        <img src="{{LOGO_MAPFRE}}" alt="MAPFRE" onerror="this.onerror=null;this.src='public/logo_mafre.jpg';">
+    </div>
+</div>
+
+<!-- PÁGINA 7 -->
+<div class="page">
+    <div class="header-bar"></div>
+    <div class="content-area">
+        <div class="section-title mt-2">CANAIS DE COMUNICAÇÃO</div>
+        <div class="section-text">
+            SAC (Serviço de Atendimento ao Cliente)<br>
+            0800 775 4545<br>
+            0800 775 5045: Deficiente auditivo ou de fala<br>
+            24 horas, sete dias da semana.
+        </div>
+
+        <div class="section-text mt-3">
+            Comunicação de Sinistro e Assistência 24 horas<br>
+            4004 0101: Capitais e regiões metropolitanas<br>
+            0800 705 0101: Demais localidades
+        </div>
+
+        <div class="section-text mt-3">
+            Ouvidoria<br>
+            0800 775 1079<br>
+            0800 962 7373: Deficiente auditivo ou de fala
+        </div>
+
+        <div class="section-text mt-3">
+            De segunda-feira à sexta-feira, das 8:00h às 20:00h (exceto feriados). A Ouvidoria poderá ser acionada
+            para atuar na defesa dos direitos dos consumidores, esclarecer e/ou solucionar demandas já tratadas pelos
+            canais de atendimento habituais.
+        </div>
+
+        <div class="section-text mt-3">
+            Plataforma digital oficial para registro de reclamações dos consumidores:<br>
+            www.consumidor.gov.br
+        </div>
+
+        <div class="section-text mt-3">
+            SUSEP (Superintendência de Seguros Privados)<br>
+            Autarquia Federal responsável pela fiscalização, formalização e controle dos mercados de seguro,
+            previdência complementar aberta, capitalização, resseguro e corretagem de seguros. 0800 0218484:
+            Atendimento exclusivo ao consumidor, das 9:30 às 17h.
+        </div>
+    </div>
+    <div class="page-footer-info"><span class="label">7</span><br>Classificação: Uso Interno</div>
+    <div class="mapfre-footer-logo">
+        <img src="{{LOGO_MAPFRE}}" alt="MAPFRE" onerror="this.onerror=null;this.src='public/logo_mafre.jpg';">
+    </div>
+</div>
+</body>
+</html>

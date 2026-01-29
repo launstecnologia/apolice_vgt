@@ -1,0 +1,32 @@
+[
+  {
+    "id": "loc_001",
+    "segurado": {
+      "nome": "João da Silva",
+      "tipo": "PF",
+      "cpf_cnpj": "123.456.789-00",
+      "endereco": "Rua A, 123",
+      "bairro": "Centro",
+      "cep": "00000-000",
+      "cidade": "São Paulo",
+      "uf": "SP"
+    },
+    "risco": {
+      "endereco": "Rua B, 456",
+      "numero": "456",
+      "bairro": "Jardins",
+      "cep": "11111-111",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "questionario": "Sim; Sim; Não"
+    },
+    "coberturas": {
+      "incendio": "125.000,00",
+      "incendio_conteudo": "20.000,00",
+      "vendaval": "3.750,00",
+      "perda_aluguel": "4.800,00",
+      "danos_eletricos": "3.000,00",
+      "responsabilidade_civil": "3.750,00"
+    }
+  }
+]
