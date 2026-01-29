@@ -35,6 +35,7 @@ $usuarioModel = new Usuario(db());
 $apoliceModel = new Apolice(db());
 
 $alerts = [];
+$importDebug = [];
 function tailLog(string $path, int $maxLines = 120): string
 {
     if (!file_exists($path)) {
@@ -93,6 +94,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'import_apolices') {
         $imobiliariaId = (int) ($_POST['imobiliaria_id'] ?? 0);
         $file = $_FILES['planilha'] ?? null;
+        $importDebug = [
+            'imobiliaria_id' => $imobiliariaId,
+            'file_error' => $file['error'] ?? 'n/a',
+            'file_name' => $file['name'] ?? '',
+            'file_size' => $file['size'] ?? '',
+            'tmp_name' => $file['tmp_name'] ?? '',
+            'upload_max_filesize' => ini_get('upload_max_filesize'),
+            'post_max_size' => ini_get('post_max_size'),
+        ];
         if ($imobiliariaId > 0 && $file && $file['error'] === UPLOAD_ERR_OK) {
             try {
                 $autoloadPath = __DIR__ . '/../vendor/autoload.php';
@@ -100,6 +110,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($autoloadExists) {
                     require_once $autoloadPath;
                 }
+                $importDebug['autoload_path'] = $autoloadPath;
+                $importDebug['autoload_exists'] = $autoloadExists ? 'SIM' : 'NÃO';
+                $importDebug['phpspreadsheet_loaded'] = class_exists(IOFactory::class) ? 'SIM' : 'NÃO';
                 if (!class_exists(IOFactory::class)) {
                     $logger->security('Autoload path: ' . $autoloadPath . ' exists=' . ($autoloadExists ? 'yes' : 'no'));
                     $logger->security('Include path: ' . get_include_path());
@@ -222,6 +235,12 @@ $securityLog = tailLog($config['storage_path'] . '/logs/security.log');
                 <input type="file" name="planilha" accept=".csv,.xlsx,.xls" class="rounded border p-2 text-sm">
                 <button class="rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white">Importar</button>
             </form>
+            <?php if (!empty($importDebug)): ?>
+                <div class="mt-3 rounded bg-slate-50 p-3 text-xs text-slate-700">
+                    <div class="font-semibold mb-1">Diagnóstico do upload</div>
+                    <pre><?php echo htmlspecialchars(print_r($importDebug, true), ENT_QUOTES, 'UTF-8'); ?></pre>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="rounded bg-white p-5 shadow">
