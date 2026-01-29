@@ -22,6 +22,7 @@ use App\Services\Logger;
 use App\Services\ApoliceImportService;
 use App\Services\HtmlTemplateService;
 use App\Services\PdfFromHtmlService;
+use App\Services\SeguroJsonRepository;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 $config = require __DIR__ . '/../config/app.php';
@@ -93,9 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'import_apolices') {
         $imobiliariaId = (int) ($_POST['imobiliaria_id'] ?? 0);
+        $vigenciaInicio = (string) ($_POST['vigencia_inicio'] ?? '');
         $file = $_FILES['planilha'] ?? null;
         $importDebug = [
             'imobiliaria_id' => $imobiliariaId,
+            'vigencia_inicio' => $vigenciaInicio,
             'file_error' => $file['error'] ?? 'n/a',
             'file_name' => $file['name'] ?? '',
             'file_size' => $file['size'] ?? '',
@@ -118,15 +121,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $logger->security('Include path: ' . get_include_path());
                     throw new RuntimeException('Dependência PhpSpreadsheet não carregada. Verifique vendor/autoload.php no servidor.');
                 }
+                if ($vigenciaInicio === '') {
+                    throw new RuntimeException('Informe a data de vigência para importação.');
+                }
+                $seguroRepo = new SeguroJsonRepository($config['storage_path'] . '/data/seguro_map.json');
+                $seguroMap = $seguroRepo->load();
                 $importService = new ApoliceImportService(
                     $apoliceModel,
                     new HtmlTemplateService(),
                     new PdfFromHtmlService(),
                     $config['storage_path'],
                     $config['template_html_path'],
-                    $config['logo_path']
+                    $config['logo_path'],
+                    $seguroMap
                 );
-                $result = $importService->import($file['tmp_name'], $imobiliariaId);
+                $result = $importService->import($file['tmp_name'], $imobiliariaId, $vigenciaInicio);
                 $alerts[] = ['type' => 'success', 'message' => 'Apólices importadas: ' . $result['imported']];
                 if (!empty($result['errors'])) {
                     $alerts[] = ['type' => 'error', 'message' => 'Pendências: ' . count($result['errors'])];
@@ -232,6 +241,7 @@ $securityLog = tailLog($config['storage_path'] . '/logs/security.log');
                         <option value="<?php echo (int) $imobiliaria['id']; ?>"><?php echo htmlspecialchars($imobiliaria['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
                     <?php endforeach; ?>
                 </select>
+                <input type="date" name="vigencia_inicio" class="rounded border p-2 text-sm" required>
                 <input type="file" name="planilha" accept=".csv,.xlsx,.xls" class="rounded border p-2 text-sm">
                 <button class="rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white">Importar</button>
             </form>

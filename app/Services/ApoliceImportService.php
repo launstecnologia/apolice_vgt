@@ -17,17 +17,32 @@ class ApoliceImportService
     private string $storagePath;
     private string $templateHtmlPath;
     private string $logoPath;
+    private array $seguroMap;
 
     private array $headerAliases = [
         'cpf_cnpj' => 'cpf_cnpj_locatario',
         'cpf' => 'cpf_cnpj_locatario',
         'cnpj' => 'cpf_cnpj_locatario',
         'cpf_cnpj_locatario' => 'cpf_cnpj_locatario',
+        'inquilino_doc' => 'cpf_cnpj_locatario',
+        'inquilino_nome' => 'segurado_nome',
+        'inquilino_pessoa' => 'segurado_tipo',
         'endereco' => 'endereco',
-        'data_apolice' => 'data_apolice',
-        'data' => 'data_apolice',
+        'numero' => 'numero',
+        'complemento' => 'complemento',
+        'bairro' => 'segurado_bairro',
+        'cep' => 'segurado_cep',
+        'cidade' => 'segurado_cidade',
+        'estado' => 'segurado_uf',
         'nome' => 'segurado_nome',
         'segurado_nome' => 'segurado_nome',
+        'credito_s_multa' => 'credito_s_multa',
+        'incendio' => 'coberturas_incendio',
+        'incendio_conteudo' => 'coberturas_incendio_conteudo',
+        'vendaval' => 'coberturas_vendaval',
+        'perda_aluguel' => 'coberturas_perda_aluguel',
+        'danos_eletricos' => 'coberturas_danos_eletricos',
+        'dano_eletrico' => 'coberturas_danos_eletricos',
     ];
 
     public function __construct(
@@ -36,7 +51,8 @@ class ApoliceImportService
         PdfFromHtmlService $pdfService,
         string $storagePath,
         string $templateHtmlPath,
-        string $logoPath
+        string $logoPath,
+        array $seguroMap = []
     ) {
         $this->apoliceModel = $apoliceModel;
         $this->templateService = $templateService;
@@ -44,9 +60,10 @@ class ApoliceImportService
         $this->storagePath = $storagePath;
         $this->templateHtmlPath = $templateHtmlPath;
         $this->logoPath = $logoPath;
+        $this->seguroMap = $seguroMap;
     }
 
-    public function import(string $filePath, int $imobiliariaId): array
+    public function import(string $filePath, int $imobiliariaId, string $vigenciaInicio): array
     {
         if (!class_exists(IOFactory::class)) {
             $autoload = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -60,6 +77,8 @@ class ApoliceImportService
 
         $sheet = $this->loadSheet($filePath);
         $headerMap = $this->detectHeaderMap($sheet);
+        $categoryIndex = $this->buildCategoryIndex($this->seguroMap);
+        $vigenciaInicioNormalized = $this->normalizeDate($vigenciaInicio);
 
         $maxRow = $sheet->getHighestRow();
         $imported = 0;
@@ -71,9 +90,14 @@ class ApoliceImportService
                 continue;
             }
 
+            if (!empty($categoryIndex)) {
+                $data = $this->fillCoberturasFromMap($data, $categoryIndex);
+            }
+
             $cpf = $data['cpf_cnpj_locatario'] ?? '';
-            $endereco = $data['endereco'] ?? '';
-            $dataApolice = $this->normalizeDate($data['data_apolice'] ?? '');
+            $endereco = $this->buildEndereco($data);
+            $data['endereco'] = $endereco;
+            $dataApolice = $vigenciaInicioNormalized;
 
             if ($cpf === '' || $dataApolice === '') {
                 $errors[] = ['row' => $row, 'message' => 'CPF/CNPJ ou data da apólice ausente'];
@@ -203,6 +227,186 @@ class ApoliceImportService
         return $dt->format('Y-m-d');
     }
 
+    private function buildEndereco(array $data): string
+    {
+        $endereco = trim((string) ($data['endereco'] ?? ''));
+        $numero = trim((string) ($data['numero'] ?? ''));
+        $complemento = trim((string) ($data['complemento'] ?? ''));
+
+        $parts = [];
+        if ($endereco !== '') {
+            $parts[] = $endereco;
+        }
+        if ($numero !== '') {
+            $parts[] = $numero;
+        }
+        $joined = implode(', ', $parts);
+        if ($complemento !== '') {
+            $joined .= ' ' . $complemento;
+        }
+
+        return $joined;
+    }
+
+    private function fillCoberturasFromMap(array $data, array $categoryIndex): array
+    {
+        if (empty($data['credito_s_multa'])) {
+            return $data;
+        }
+
+        $credito = $this->normalizeDecimal((string) $data['credito_s_multa']);
+        if ($credito === null) {
+            return $data;
+        }
+
+        $categoria = $this->detectCategoriaFromCredito($credito);
+        if ($categoria === null || !isset($categoryIndex[$categoria])) {
+            return $data;
+        }
+
+        $creditoCents = $this->toCents($credito);
+        $premioCents = $this->encontrarPremioReferencia($creditoCents, $categoryIndex[$categoria]['premios']);
+        if ($premioCents === null) {
+            return $data;
+        }
+
+        $row = $categoryIndex[$categoria]['data'][(string) $premioCents] ?? null;
+        if ($row === null || !empty($row['ambiguous'])) {
+            return $data;
+        }
+
+        $data = $this->setCoberturaIfEmpty($data, 'coberturas_incendio', $row['incendio'] ?? null);
+        $data = $this->setCoberturaIfEmpty($data, 'coberturas_incendio_conteudo', $row['incendio_conteudo'] ?? null);
+        $data = $this->setCoberturaIfEmpty($data, 'coberturas_vendaval', $row['vendaval'] ?? null);
+        $data = $this->setCoberturaIfEmpty($data, 'coberturas_perda_aluguel', $row['perda_aluguel'] ?? null);
+        $data = $this->setCoberturaIfEmpty($data, 'coberturas_danos_eletricos', $row['danos_eletricos'] ?? null);
+
+        return $data;
+    }
+
+    private function setCoberturaIfEmpty(array $data, string $key, $value): array
+    {
+        if ($value === null || $value === '') {
+            return $data;
+        }
+        if (!isset($data[$key]) || $data[$key] === '') {
+            $data[$key] = (string) $value;
+        }
+
+        return $data;
+    }
+
+    private function normalizeDecimal(string $value): ?string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return null;
+        }
+
+        $value = str_replace(['R$', ' '], '', $value);
+
+        if (strpos($value, ',') !== false) {
+            $value = str_replace('.', '', $value);
+            $value = str_replace(',', '.', $value);
+        } else {
+            if (substr_count($value, '.') > 1) {
+                $parts = explode('.', $value);
+                $decimal = array_pop($parts);
+                $value = implode('', $parts) . '.' . $decimal;
+            }
+        }
+
+        if (!preg_match('/^\d+(\.\d+)?$/', $value)) {
+            return null;
+        }
+
+        if (strpos($value, '.') === false) {
+            return $value . '.00';
+        }
+
+        [$int, $dec] = explode('.', $value, 2);
+        $dec = substr($dec . '00', 0, 2);
+
+        return $int . '.' . $dec;
+    }
+
+    private function detectCategoriaFromCredito(string $credito): ?string
+    {
+        $parts = explode('.', $credito, 2);
+        $centavos = $parts[1] ?? '00';
+
+        if ($centavos === '99') {
+            return 'COMERCIAL: COMÉRCIO E SERVIÇO';
+        }
+        if ($centavos === '98') {
+            return 'COMERCIAL: ESCRITÓRIO E CONSULTÓRIO';
+        }
+        if ($centavos === '97') {
+            return 'RESIDENCIAL: CASA';
+        }
+        if ($centavos === '96') {
+            return 'RESIDENCIAL: APARTAMENTO';
+        }
+
+        return null;
+    }
+
+    private function buildCategoryIndex(array $map): array
+    {
+        $index = [];
+
+        foreach ($map as $premio => $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $categoria = $row['categoria'] ?? $row['tipo'] ?? null;
+            if ($categoria === null || !$this->isPremioKey($premio)) {
+                continue;
+            }
+
+            $cents = $this->toCents($premio);
+            if (!isset($index[$categoria])) {
+                $index[$categoria] = [
+                    'premios' => [],
+                    'data' => [],
+                ];
+            }
+            $index[$categoria]['premios'][] = $cents;
+            $index[$categoria]['data'][(string) $cents] = $row;
+        }
+
+        foreach ($index as $categoria => $payload) {
+            $premios = $payload['premios'];
+            sort($premios, SORT_NUMERIC);
+            $index[$categoria]['premios'] = $premios;
+        }
+
+        return $index;
+    }
+
+    private function isPremioKey(string $value): bool
+    {
+        return (bool) preg_match('/^\d+\.\d{2}$/', $value);
+    }
+
+    private function toCents(string $value): int
+    {
+        [$int, $dec] = explode('.', $value, 2);
+        return ((int) $int * 100) + (int) $dec;
+    }
+
+    private function encontrarPremioReferencia(int $creditoCents, array $premiosCents): ?int
+    {
+        foreach ($premiosCents as $premioCents) {
+            if ($premioCents >= $creditoCents) {
+                return $premioCents;
+            }
+        }
+
+        return null;
+    }
+
     private function generatePdf(array $row, string $dataApolice): string
     {
         $pdfDir = rtrim($this->storagePath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'pdf';
@@ -214,16 +418,27 @@ class ApoliceImportService
         $htmlPath = $pdfDir . DIRECTORY_SEPARATOR . 'tmp_' . $safeId . '.html';
         $pdfPath = $pdfDir . DIRECTORY_SEPARATOR . 'apolice_' . $safeId . '.pdf';
 
+        $vigenciaFim = $this->calculateEndDate($dataApolice);
+        $dataProposta = $this->calculateProposalDate($dataApolice);
+
         $placeholders = [
             'LOGO_MAPFRE' => $this->buildLogoDataUri($this->logoPath),
             'NOME_SEGURADO' => $row['segurado_nome'] ?? '',
+            'TIPO_PESSOA' => $row['segurado_tipo'] ?? '',
             'CPF_CNPJ' => $row['cpf_cnpj_locatario'] ?? '',
             'ENDERECO_SEGURADO' => $row['endereco'] ?? '',
-            'CIDADE_SEGURADO' => $row['cidade'] ?? '',
-            'UF_SEGURADO' => $row['uf'] ?? '',
+            'BAIRRO_SEGURADO' => $row['segurado_bairro'] ?? '',
+            'CEP_SEGURADO' => $row['segurado_cep'] ?? '',
+            'CIDADE_SEGURADO' => $row['segurado_cidade'] ?? '',
+            'UF_SEGURADO' => $row['segurado_uf'] ?? '',
             'VIGENCIA_INICIO' => $this->formatDateBr($dataApolice),
-            'VIGENCIA_FIM' => $this->formatDateBr($dataApolice),
-            'DATA_PROPOSTA' => $this->formatDateBr($dataApolice),
+            'VIGENCIA_FIM' => $this->formatDateBr($vigenciaFim),
+            'DATA_PROPOSTA' => $this->formatDateBr($dataProposta),
+            'VALOR_INCENDIO' => $this->formatMoney($row['coberturas_incendio'] ?? ''),
+            'VALOR_INCENDIO_CONTEUDO' => $this->formatMoney($row['coberturas_incendio_conteudo'] ?? ''),
+            'VALOR_VENDAVAL' => $this->formatMoney($row['coberturas_vendaval'] ?? ''),
+            'VALOR_PERDA_ALUGUEL' => $this->formatMoney($row['coberturas_perda_aluguel'] ?? ''),
+            'VALOR_DANOS_ELETRICOS' => $this->formatMoney($row['coberturas_danos_eletricos'] ?? ''),
         ];
 
         $this->templateService->render($this->templateHtmlPath, $htmlPath, $placeholders);
@@ -259,5 +474,37 @@ class ApoliceImportService
             return $dt->format('d/m/Y');
         }
         return $value;
+    }
+
+    private function formatMoney($value): string
+    {
+        if ($value === '' || $value === null) {
+            return '';
+        }
+        if (is_numeric($value)) {
+            return number_format((float) $value, 2, ',', '.');
+        }
+        return (string) $value;
+    }
+
+    private function calculateProposalDate(string $vigenciaInicio): string
+    {
+        $dt = \DateTime::createFromFormat('Y-m-d', $vigenciaInicio);
+        if (!$dt instanceof \DateTime) {
+            return $vigenciaInicio;
+        }
+        $dt->modify('first day of next month');
+        return $dt->format('Y-m-d');
+    }
+
+    private function calculateEndDate(string $vigenciaInicio): string
+    {
+        $dt = \DateTime::createFromFormat('Y-m-d', $vigenciaInicio);
+        if (!$dt instanceof \DateTime) {
+            return $vigenciaInicio;
+        }
+        $dt->modify('+1 month');
+        $dt->modify('-1 day');
+        return $dt->format('Y-m-d');
     }
 }
