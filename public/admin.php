@@ -122,7 +122,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $logger->security('Erro importando planilha: ' . $e->getMessage());
                 $logger->audit('Erro importando planilha: ' . $e->getMessage());
                 error_log('Erro importando planilha: ' . $e->getMessage());
-                $alerts[] = ['type' => 'error', 'message' => 'Erro ao importar planilha: ' . $e->getMessage()];
+                $autoloadPath = __DIR__ . '/../vendor/autoload.php';
+                $autoloadExists = file_exists($autoloadPath) ? 'SIM' : 'NÃO';
+                $alerts[] = [
+                    'type' => 'error',
+                    'message' => 'Erro ao importar planilha: ' . $e->getMessage()
+                        . ' | autoload: ' . $autoloadPath . ' (existe: ' . $autoloadExists . ')',
+                ];
             }
         } else {
             $alerts[] = ['type' => 'error', 'message' => 'Selecione a imobiliária e a planilha.'];
