@@ -24,6 +24,7 @@ class ApoliceImportService
         'cpf' => 'cpf_cnpj_locatario',
         'cnpj' => 'cpf_cnpj_locatario',
         'cpf_cnpj_locatario' => 'cpf_cnpj_locatario',
+        'segurado_cpf_cnpj' => 'cpf_cnpj_locatario',
         'inquilino_doc' => 'cpf_cnpj_locatario',
         'inquilino_nome' => 'segurado_nome',
         'inquilino_pessoa' => 'segurado_tipo',
@@ -36,6 +37,20 @@ class ApoliceImportService
         'estado' => 'segurado_uf',
         'nome' => 'segurado_nome',
         'segurado_nome' => 'segurado_nome',
+        'segurado_tipo' => 'segurado_tipo',
+        'segurado_endereco' => 'endereco',
+        'segurado_bairro' => 'segurado_bairro',
+        'segurado_cep' => 'segurado_cep',
+        'segurado_cidade' => 'segurado_cidade',
+        'segurado_uf' => 'segurado_uf',
+        'risco_endereco' => 'risco_endereco',
+        'risco_numero' => 'risco_numero',
+        'risco_bairro' => 'risco_bairro',
+        'risco_cep' => 'risco_cep',
+        'risco_cidade' => 'risco_cidade',
+        'risco_uf' => 'risco_uf',
+        'questionario' => 'risco_questionario',
+        'risco_questionario' => 'risco_questionario',
         'credito_s_multa' => 'credito_s_multa',
         'data_apolice' => 'data_apolice',
         'data' => 'data_apolice',
@@ -242,8 +257,8 @@ class ApoliceImportService
 
     private function buildEndereco(array $data): string
     {
-        $endereco = trim((string) ($data['endereco'] ?? ''));
-        $numero = trim((string) ($data['numero'] ?? ''));
+        $endereco = trim((string) ($data['risco_endereco'] ?? $data['endereco'] ?? ''));
+        $numero = trim((string) ($data['risco_numero'] ?? $data['numero'] ?? ''));
         $complemento = trim((string) ($data['complemento'] ?? ''));
 
         $parts = [];
@@ -444,6 +459,13 @@ class ApoliceImportService
             'CEP_SEGURADO' => $row['segurado_cep'] ?? '',
             'CIDADE_SEGURADO' => $row['segurado_cidade'] ?? '',
             'UF_SEGURADO' => $row['segurado_uf'] ?? '',
+            'ENDERECO_RISCO' => $row['risco_endereco'] ?? '',
+            'NUMERO_RISCO' => $row['risco_numero'] ?? '',
+            'BAIRRO_RISCO' => $row['risco_bairro'] ?? '',
+            'CEP_RISCO' => $row['risco_cep'] ?? '',
+            'CIDADE_RISCO' => $row['risco_cidade'] ?? '',
+            'UF_RISCO' => $row['risco_uf'] ?? '',
+            'QUESTIONARIO_RESPOSTAS' => $row['risco_questionario'] ?? '',
             'VIGENCIA_INICIO' => $this->formatDateBr($dataApolice),
             'VIGENCIA_FIM' => $this->formatDateBr($vigenciaFim),
             'DATA_PROPOSTA' => $this->formatDateBr($dataProposta),
