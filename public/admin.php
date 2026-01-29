@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+$vendorAutoload = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($vendorAutoload)) {
+    require_once $vendorAutoload;
+}
+
 require __DIR__ . '/../app/bootstrap.php';
 require __DIR__ . '/../app/autoload.php';
 
@@ -14,11 +23,6 @@ use App\Services\ApoliceImportService;
 use App\Services\HtmlTemplateService;
 use App\Services\PdfFromHtmlService;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-
-$vendorAutoload = __DIR__ . '/../vendor/autoload.php';
-if (file_exists($vendorAutoload)) {
-    require_once $vendorAutoload;
-}
 
 $config = require __DIR__ . '/../config/app.php';
 $logger = new Logger($config['storage_path']);
@@ -109,7 +113,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             } catch (Throwable $e) {
                 $logger->security('Erro importando planilha: ' . $e->getMessage());
-                $alerts[] = ['type' => 'error', 'message' => 'Erro ao importar planilha. Consulte o log de segurança.'];
+                $logger->audit('Erro importando planilha: ' . $e->getMessage());
+                error_log('Erro importando planilha: ' . $e->getMessage());
+                $alerts[] = ['type' => 'error', 'message' => 'Erro ao importar planilha: ' . $e->getMessage()];
             }
         } else {
             $alerts[] = ['type' => 'error', 'message' => 'Selecione a imobiliária e a planilha.'];

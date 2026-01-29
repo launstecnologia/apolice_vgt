@@ -48,6 +48,16 @@ class ApoliceImportService
 
     public function import(string $filePath, int $imobiliariaId): array
     {
+        if (!class_exists(IOFactory::class)) {
+            $autoload = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+            if (file_exists($autoload)) {
+                require_once $autoload;
+            }
+        }
+        if (!class_exists(IOFactory::class)) {
+            throw new \RuntimeException('PhpSpreadsheet não carregado. Verifique vendor/autoload.php.');
+        }
+
         $sheet = $this->loadSheet($filePath);
         $headerMap = $this->detectHeaderMap($sheet);
 
