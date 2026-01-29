@@ -95,8 +95,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file = $_FILES['planilha'] ?? null;
         if ($imobiliariaId > 0 && $file && $file['error'] === UPLOAD_ERR_OK) {
             try {
+                $autoloadPath = __DIR__ . '/../vendor/autoload.php';
+                $autoloadExists = file_exists($autoloadPath);
+                if ($autoloadExists) {
+                    require_once $autoloadPath;
+                }
                 if (!class_exists(IOFactory::class)) {
-                    throw new RuntimeException('Dependência PhpSpreadsheet não carregada. Confirme "composer install" na raiz do projeto.');
+                    $logger->security('Autoload path: ' . $autoloadPath . ' exists=' . ($autoloadExists ? 'yes' : 'no'));
+                    $logger->security('Include path: ' . get_include_path());
+                    throw new RuntimeException('Dependência PhpSpreadsheet não carregada. Verifique vendor/autoload.php no servidor.');
                 }
                 $importService = new ApoliceImportService(
                     $apoliceModel,
