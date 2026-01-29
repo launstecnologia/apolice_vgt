@@ -84,18 +84,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imobiliariaId = (int) ($_POST['imobiliaria_id'] ?? 0);
         $file = $_FILES['planilha'] ?? null;
         if ($imobiliariaId > 0 && $file && $file['error'] === UPLOAD_ERR_OK) {
-            $importService = new ApoliceImportService(
-                $apoliceModel,
-                new HtmlTemplateService(),
-                new PdfFromHtmlService(),
-                $config['storage_path'],
-                $config['template_html_path'],
-                $config['logo_path']
-            );
-            $result = $importService->import($file['tmp_name'], $imobiliariaId);
-            $alerts[] = ['type' => 'success', 'message' => 'Apólices importadas: ' . $result['imported']];
-            if (!empty($result['errors'])) {
-                $alerts[] = ['type' => 'error', 'message' => 'Pendências: ' . count($result['errors'])];
+            try {
+                $importService = new ApoliceImportService(
+                    $apoliceModel,
+                    new HtmlTemplateService(),
+                    new PdfFromHtmlService(),
+                    $config['storage_path'],
+                    $config['template_html_path'],
+                    $config['logo_path']
+                );
+                $result = $importService->import($file['tmp_name'], $imobiliariaId);
+                $alerts[] = ['type' => 'success', 'message' => 'Apólices importadas: ' . $result['imported']];
+                if (!empty($result['errors'])) {
+                    $alerts[] = ['type' => 'error', 'message' => 'Pendências: ' . count($result['errors'])];
+                }
+            } catch (Throwable $e) {
+                $logger->security('Erro importando planilha: ' . $e->getMessage());
+                $alerts[] = ['type' => 'error', 'message' => 'Erro ao importar planilha. Consulte o log de segurança.'];
             }
         } else {
             $alerts[] = ['type' => 'error', 'message' => 'Selecione a imobiliária e a planilha.'];
