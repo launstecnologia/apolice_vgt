@@ -37,6 +37,10 @@ class ApoliceImportService
         'nome' => 'segurado_nome',
         'segurado_nome' => 'segurado_nome',
         'credito_s_multa' => 'credito_s_multa',
+        'data_apolice' => 'data_apolice',
+        'data' => 'data_apolice',
+        'vigencia' => 'data_apolice',
+        'vigencia_inicio' => 'data_apolice',
         'incendio' => 'coberturas_incendio',
         'incendio_conteudo' => 'coberturas_incendio_conteudo',
         'vendaval' => 'coberturas_vendaval',
@@ -63,7 +67,7 @@ class ApoliceImportService
         $this->seguroMap = $seguroMap;
     }
 
-    public function import(string $filePath, int $imobiliariaId, string $vigenciaInicio): array
+    public function import(string $filePath, int $imobiliariaId): array
     {
         if (!class_exists(IOFactory::class)) {
             $autoload = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -78,7 +82,6 @@ class ApoliceImportService
         $sheet = $this->loadSheet($filePath);
         $headerMap = $this->detectHeaderMap($sheet);
         $categoryIndex = $this->buildCategoryIndex($this->seguroMap);
-        $vigenciaInicioNormalized = $this->normalizeDate($vigenciaInicio);
 
         $maxRow = $sheet->getHighestRow();
         $imported = 0;
@@ -97,7 +100,7 @@ class ApoliceImportService
             $cpf = $data['cpf_cnpj_locatario'] ?? '';
             $endereco = $this->buildEndereco($data);
             $data['endereco'] = $endereco;
-            $dataApolice = $vigenciaInicioNormalized;
+            $dataApolice = $this->resolveDataApolice($data);
 
             if ($cpf === '' || $dataApolice === '') {
                 $errors[] = ['row' => $row, 'message' => 'CPF/CNPJ ou data da apólice ausente'];
@@ -120,6 +123,16 @@ class ApoliceImportService
         }
 
         return ['imported' => $imported, 'errors' => $errors];
+    }
+
+    private function resolveDataApolice(array $data): string
+    {
+        $raw = (string) ($data['data_apolice'] ?? '');
+        $normalized = $this->normalizeDate($raw);
+        if ($normalized !== '') {
+            return $normalized;
+        }
+        return date('Y-m-d');
     }
 
     private function loadSheet(string $filePath): Worksheet
