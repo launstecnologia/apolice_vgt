@@ -13,6 +13,12 @@ use App\Services\Logger;
 use App\Services\ApoliceImportService;
 use App\Services\HtmlTemplateService;
 use App\Services\PdfFromHtmlService;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
+$vendorAutoload = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($vendorAutoload)) {
+    require_once $vendorAutoload;
+}
 
 $config = require __DIR__ . '/../config/app.php';
 $logger = new Logger($config['storage_path']);
@@ -85,6 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file = $_FILES['planilha'] ?? null;
         if ($imobiliariaId > 0 && $file && $file['error'] === UPLOAD_ERR_OK) {
             try {
+                if (!class_exists(IOFactory::class)) {
+                    throw new RuntimeException('Dependência PhpSpreadsheet não carregada. Confirme "composer install" na raiz do projeto.');
+                }
                 $importService = new ApoliceImportService(
                     $apoliceModel,
                     new HtmlTemplateService(),
